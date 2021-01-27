@@ -21,6 +21,9 @@ const Header = () => {
         <Nav.Link as={Link} to="/addpost">
          New Post
         </Nav.Link>
+        <Nav.Link as={Link} to="/login">
+         LOGIN
+        </Nav.Link>
       </Nav>
     </Navbar>
   );

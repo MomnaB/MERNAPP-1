@@ -11,6 +11,7 @@ import AddPost from "./components/Posts/AddPost";
 import Posts from "./components/Posts/Posts";
 import SinglePost from "./components/Posts/SinglePost";
 import UpdatePost from "./components/Posts/UpdatePost";
+import Login from "./components/Users/Login";
 function App() {
   return (
     <Router>
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route path="/update-post/:id">
             <UpdatePost />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
           <Route path="/">
             <Home />

@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col, Button } from "react-bootstrap";
 import axios from 'axios';
-import {useDispatch, useSelector} from 'react-redux'
-import { fetchAllPosts } from "../../store/apis";
+import {useDispatch} from 'react-redux'
 import DeleteModal from "../subComponents/DeleteModal";
 import { useHistory } from 'react-router-dom'
 
@@ -12,18 +11,15 @@ function Posts() {
   const history = useHistory();
 
 const dispatch = useDispatch()
-// const posts = useSelector(state =>{
-//   console.log(state)
-// })
-// console.log(posts)
   const [msg, setmsg] = useState('')
+  const [reload, setreload] = useState(false)
   const handleDelete = (id)=>{
     console.log(id)
     axios.delete('http://localhost:4000/api/posts/'+id)
     .then((res) => {
       console.log(res.data);
       setmsg(`${id} is deleted successfully`);
-       history.push('/posts')
+      setreload(!reload)
 
     })
     .catch((e) => console.log(e));
@@ -31,15 +27,14 @@ const dispatch = useDispatch()
   }
   useEffect(() => {
 console.log('i am in useeffect of posts')
- //dispatch(fetchAllPosts)
-    
       axios.get('http://localhost:4000/api/posts/')
       .then((res) => {
         console.log(res.data);
         setstate(res.data.data);
       })
       .catch((e) => console.log(e));
-  }, [dispatch]);
+      setmsg('')
+  }, [reload]);
   return (
     <Row className="mt-5">
       <Col lg={3} md={2} sm={1} xs={1}></Col>
@@ -49,7 +44,7 @@ console.log('i am in useeffect of posts')
           <ListGroup.Item variant="primary">
             <Row className="col-headers">
               <Col>Name</Col>
-              <Col>Email</Col>
+              <Col>Description</Col>
               <Col>Actions</Col>
             </Row>
           </ListGroup.Item>
@@ -76,13 +71,7 @@ console.log('i am in useeffect of posts')
                   >
                     Edit
                   </Button>&nbsp;
-                  {/* <Button 
-                    variant="info"
-                    size="sm" 
-                    onClick={()=>handleDelete(item._id)}
-                  >
-                    Delete
-                  </Button> */}
+    
                   <DeleteModal handleDelete={handleDelete} id={item._id}/>
 
                 </Col>
