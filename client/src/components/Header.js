@@ -1,8 +1,9 @@
-import React from "react";
+import {React} from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 
 const Header = () => {
+
   return (
     <Navbar bg="primary" variant="dark" className="">
       <Navbar.Brand as={Link} to="/">
@@ -24,8 +25,12 @@ const Header = () => {
         <Nav.Link as={Link} to="/login">
          LOGIN
         </Nav.Link>
+
       </Nav>
     </Navbar>
+    
+  
+
   );
 };
 
