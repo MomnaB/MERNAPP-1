@@ -17,7 +17,6 @@ export default function ImgMediaCard({item,index}) {
   const classes = useStyles();
 
   return (
-    
     <Card key={index}  className={classes.root}>
       <CardActionArea>
         <CardMedia class="b"
@@ -38,7 +37,5 @@ export default function ImgMediaCard({item,index}) {
       </CardActionArea>
    
     </Card>
-  
   );
-  
 }

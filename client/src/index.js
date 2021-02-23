@@ -5,10 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store/store';
 import { Provider } from 'react-redux';
+import Editable from './components/table/Editable';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+      {/* <Editable/> */}
+    <App/>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

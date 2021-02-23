@@ -1,3 +1,4 @@
+import React,{useEffect} from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,8 +12,23 @@ import AddPost from "./components/Posts/AddPost";
 import Posts from "./components/Posts/Posts";
 import SinglePost from "./components/Posts/SinglePost";
 import UpdatePost from "./components/Posts/UpdatePost";
-import Login from "./components/Users/Login";
+import Signin from "./components/Auth/SignIn";
+import Logout from "./components/Auth/Logout";
+import axios from "axios";
+import { useHistory } from 'react-router-dom';
+
 function App() {
+  // useEffect(() => {
+  //   axios.get('http://localhost:4000/api/users/authcheck')
+  //   .then(res => {
+  //       console.log(res);
+  //       // console.log('login successful')
+  //       // history.push('/')
+  //   })
+  //   .catch(err=>console.log(err,'error'));
+
+  // }, [])
+
   return (
     <Router>
       <div>
@@ -43,7 +59,10 @@ function App() {
             <UpdatePost />
           </Route>
           <Route path="/login">
-            <Login />
+            <Signin />
+          </Route>
+          <Route path="/logout">
+            <Logout />
           </Route>
           <Route path="/">
             <Home />
@@ -52,6 +71,6 @@ function App() {
       </div>
     </Router>
   );
-  }
+}
 
 export default App;

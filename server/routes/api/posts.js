@@ -1,10 +1,11 @@
-const express = require('express')
+const express = require('express');
+const auth = require('../../middleware/auth');
 const Post = require('../../models/posts')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
     // get posts from posts
-    const posts = await Post.find();
+    const posts = await Post.find().sort({createdAt:-1});
     res.json({
         success: true,
         status: 200, //ok
@@ -12,10 +13,10 @@ router.get('/', async (req, res) => {
     })
 
 })
-router.post('/add', async (req, res) => {
-    console.log("....", req.body)
+router.post('/add',auth, async (req, res) => {
     try {
         const post = await Post.create(req.body)
+        console.log(req.userData)
         res.json({
             success: true,
             status: 201,
@@ -43,7 +44,7 @@ router.get('/:id', async (req, res) => {
     })
 
 })
-router.put('update/:id', async (req, res) => {
+router.post('update/:id', async (req, res) => {
     console.log('update')
     const post = await Post.findByIdAndUpdate(req.params.id, req.body);
     res.json({
@@ -55,7 +56,7 @@ router.put('update/:id', async (req, res) => {
 
 
 })
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',auth, async (req, res) => {
     try {
          const post = await Post.findByIdAndDelete(req.params.id);
     res.json({
